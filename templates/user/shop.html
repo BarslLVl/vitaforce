@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+<section class="shop-section">
+    <div class="container">
+        <h2 class="section-title">Shop Our Products</h2>
+
+        <!-- Filter buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Products</button>
+            <button class="filter-btn" data-filter="nutrition">Nutrition Products</button>
+            <button class="filter-btn" data-filter="exercise">Exercise Products</button>
+        </div>
+
+        <!-- Product cards -->
+        <div class="product-cards">
+            <!-- Nutrition Product Card 1 -->
+            <div class="product-card" data-category="nutrition">
+                <img src="/assets/media/shop/whey-protein.png" alt="Whey Protein">
+                <h3>Whey Protein</h3>
+                <p>High-quality protein for muscle recovery and growth.</p>
+                <span class="price">£29.99</span>
+                <button class="btn add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Nutrition Product Card 2 -->
+            <div class="product-card" data-category="nutrition">
+                <img src="/assets/media/shop/multivitamins.png" alt="Multivitamins">
+                <h3>Multivitamins</h3>
+                <p>Daily essential vitamins to keep you in top shape.</p>
+                <span class="price">£14.99</span>
+                <button class="btn add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Exercise Product Card 1 -->
+            <div class="product-card" data-category="exercise">
+                <img src="/assets/media/shop/dumbbells.png" alt="Dumbbells">
+                <h3>Adjustable Dumbbells</h3>
+                <p>Perfect for strength training at home.</p>
+                <span class="price">£49.99</span>
+                <button class="btn add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Exercise Product Card 2 -->
+            <div class="product-card" data-category="exercise">
+                <img src="/assets/media/shop/resistance-bands.png" alt="Resistance Bands">
+                <h3>Resistance Bands</h3>
+                <p>Versatile bands for strength and flexibility training.</p>
+                <span class="price">£12.99</span>
+                <button class="btn add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Nutrition Product Card 3 -->
+            <div class="product-card" data-category="nutrition">
+                <img src="/assets/media/shop/creatine.png" alt="Creatine">
+                <h3>Creatine Monohydrate</h3>
+                <p>Boost muscle power and performance.</p>
+                <span class="price">£19.99</span>
+                <button class="btn add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Exercise Product Card 3 -->
+            <div class="product-card" data-category="exercise">
+                <img src="/assets/media/shop/yoga-mat.png" alt="Yoga Mat">
+                <h3>Yoga Mat</h3>
+                <p>Comfortable and durable mat for yoga and stretching exercises.</p>
+                <span class="price">£24.99</span>
+                <button class="btn add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

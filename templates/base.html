@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}VitaForce{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/"><img src="{% static 'media/logo/vitaforce-background.png' %}" alt="VitaForce Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/plans">Plans</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/support">Support</a></li>
+            <li><a href="/cart">Cart</a></li>
+
+            {% if request.user.is_authenticated %}
+            <!-- Profile Icon and Dropdown for logged-in users -->
+            <li class="profile-icon">
+                <img src="{% static 'media/user/user.png' %}" alt="User Profile" id="profile-icon">
+                <div class="dropdown-menu" id="profile-menu">
+                    <a href="/profile">My Profile</a>
+                    <a href="/my-plan">My Plan</a>
+                    <a href="/settings">Settings</a>
+                    <a href="/notifications">Notifications</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main>
+        {% block banner %}
+        <!-- Default banner can go here if needed -->
+        {% endblock %}
+
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 VitaForce</p>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank">
+                    <img src="{% static 'media/footer/facebook.png' %}" alt="Facebook">
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <img src="{% static 'media/footer/instagram.png' %}" alt="Instagram">
+                </a>
+                <a href="https://twitter.com" target="_blank">
+                    <img src="{% static 'media/footer/twitter.png' %}" alt="Twitter/X">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

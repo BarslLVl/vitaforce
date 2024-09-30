@@ -1,0 +1,53 @@
+# Python-specific ignores
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+
+# Django-specific ignores
+db.sqlite3  # если используешь SQLite, можно скрыть базу данных
+db.sqlite3-journal
+/media/
+staticfiles/
+.env  # скрыть файл с переменными окружения
+
+# Environment-specific ignores
+*.env
+.env.local
+.env.*.local
+*.envrc
+venv/
+.venv/
+env/
+ENV/
+Pipfile
+Pipfile.lock
+node_modules/
+
+# Ignore macOS system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Editor-specific ignores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore migrations
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Ignore secret and sensitive files
+secret_key.txt
+config/settings_local.py  # файл с локальными настройками, если есть
+
+# Ignore deployment-related files
+*.bak
+*.orig
+*.rej
