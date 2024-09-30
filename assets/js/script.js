@@ -78,23 +78,57 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Plan Filter functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const planCards = document.querySelectorAll('.plan-card');
+    // Plan Filter functionality (Only for pages with plans)
+    const currentPath = window.location.pathname;
+    if (currentPath === '/shop/' || currentPath === '/plans/') {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const planCards = document.querySelectorAll('.plan-card');
 
-    if (filterButtons.length > 0 && planCards.length > 0) {
+        if (filterButtons.length > 0 && planCards.length > 0) {
+            // Add event listener to each filter button
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const filter = this.getAttribute('data-filter');
+
+                    // Loop through each plan card and filter by category
+                    planCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            card.style.display = 'block'; // Show matching plans
+                        } else {
+                            card.style.display = 'none'; // Hide non-matching plans
+                        }
+                    });
+
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+
+                    // Add active class to the clicked button
+                    this.classList.add('active');
+                });
+            });
+        } else {
+            console.error('Filter buttons or plan cards not found!');
+        }
+    }
+
+    // Product Filter functionality (Only for shop page)
+    if (currentPath === '/shop/') {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
         // Add event listener to each filter button
         filterButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const filter = this.getAttribute('data-filter');
 
-                // Loop through each plan card and filter by category
-                planCards.forEach(card => {
+                // Loop through each product card and filter by category
+                productCards.forEach(card => {
                     const category = card.getAttribute('data-category');
                     if (filter === 'all' || category === filter) {
-                        card.style.display = 'block'; // Show matching plans
+                        card.style.display = 'block'; // Show matching products
                     } else {
-                        card.style.display = 'none'; // Hide non-matching plans
+                        card.style.display = 'none'; // Hide non-matching products
                     }
                 });
 
@@ -105,35 +139,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.classList.add('active');
             });
         });
-    } else {
-        console.error('Filter buttons or plan cards not found!');
     }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const productCards = document.querySelectorAll('.product-card');
-
-    // Add event listener to each filter button
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const filter = this.getAttribute('data-filter');
-
-            // Loop through each product card and filter by category
-            productCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                if (filter === 'all' || category === filter) {
-                    card.style.display = 'block'; // Show matching products
-                } else {
-                    card.style.display = 'none'; // Hide non-matching products
-                }
-            });
-
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-
-            // Add active class to the clicked button
-            this.classList.add('active');
-        });
-    });
 });

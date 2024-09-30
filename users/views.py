@@ -62,9 +62,28 @@ def signup_view(request):
 
         # Log the user in after successful registration
         login(request, user)
-        return redirect('home')  # Redirect to the homepage after signup
+        return redirect('home')
 
     return render(request, 'user/signup.html')
+
+# Support
+from django.shortcuts import render
+
+def support_view(request):
+    if request.method == 'POST':
+
+        full_name = request.POST.get('full_name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        description = request.POST.get('description')
+        
+
+        return render(request, 'user/support_success.html', {'name': full_name})
+    return render(request, 'user/support.html')
+
+# Cart
+def cart_view(request):
+    return render(request, 'purse/cart.html')
 
 # View for the homepage
 def index(request):
