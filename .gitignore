@@ -45,9 +45,12 @@ logs/
 
 # Ignore secret and sensitive files
 secret_key.txt
-config/settings_local.py  # файл с локальными настройками, если есть
+config/settings_local.py
 
 # Ignore deployment-related files
 *.bak
 *.orig
 *.rej
+
+# Custom
+vitaforce/settings.py

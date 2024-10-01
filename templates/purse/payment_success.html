@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<section class="payment-success-section">
+    <div class="container">
+        <div class="success-message">
+            <h2 class="section-title">Payment Successful!</h2>
+            <p>Thank you for your purchase of <strong>{{ plan.title }}</strong>. Your payment was processed successfully.</p>
+
+            <!-- Button to go back to the homepage -->
+            <a href="{% url 'home' %}" class="btn return-home-btn">Return to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

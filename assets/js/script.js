@@ -132,3 +132,49 @@ document.getElementById("hamburger").addEventListener("click", function() {
 document.getElementById("close-btn").addEventListener("click", function() {
     document.getElementById("mobile-menu").classList.remove("open");
 });
+
+// Stripe payment form functionality
+document.addEventListener('DOMContentLoaded', function () {
+    var stripe = Stripe(stripe_publishable_key);
+    var elements = stripe.elements();
+
+    // Create an instance of the card Element
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    // Handle real-time validation errors from the card Element.
+    card.on('change', function(event) {
+        var displayError = document.getElementById('error-message');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    // Handle form submission.
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        stripe.confirmCardPayment(client_secret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: user_name
+                }
+            }
+        }).then(function(result) {
+            if (result.error) {
+                // Show error to your customer (e.g., insufficient funds)
+                var errorElement = document.getElementById('error-message');
+                errorElement.textContent = result.error.message;
+            } else {
+                // The payment has been processed!
+                if (result.paymentIntent.status === 'succeeded') {
+                    window.location.href = payment_success_url;
+                }
+            }
+        });
+    });
+});

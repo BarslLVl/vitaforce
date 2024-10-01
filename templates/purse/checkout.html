@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<section class="checkout-section">
+    <div class="container">
+        <h2 class="section-title">Checkout for {{ plan.title }}</h2>
+        <div class="checkout-details">
+            <p class="plan-price">Price: <span>£{{ plan.price }}</span></p>
+
+            <form id="payment-form" class="payment-form">
+                <div id="card-element" class="card-element">
+                    <!-- Stripe Elements will create the card input here -->
+                </div>
+
+                <!-- Error message placeholder -->
+                <div id="error-message" role="alert" class="error-message"></div>
+
+                <!-- Submit button -->
+                <button id="submit" class="btn checkout-btn">Pay £{{ plan.price }}</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Load Stripe.js library -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- Pass necessary variables to the script.js -->
+<script>
+    var stripe_publishable_key = "{{ stripe_publishable_key }}";
+    var client_secret = "{{ client_secret }}";
+    var user_name = "{{ request.user.username }}";
+    var payment_success_url = "{% url 'payment_success' %}";
+</script>
+
+<!-- Include the script.js file -->
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

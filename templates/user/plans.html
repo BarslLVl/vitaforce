@@ -12,92 +12,22 @@
             <button class="filter-btn active" data-filter="all">All Plans</button>
             <button class="filter-btn" data-filter="workout">Workout Plans</button>
             <button class="filter-btn" data-filter="nutrition">Nutrition Plans</button>
-
         </div>
-
 
         <!-- Plan cards -->
         <div class="plan-cards">
-            <!-- Workout Plan Card 1 -->
-            <div class="plan-card" data-category="workout">
-                <h3>Mass Gain Workout Plan</h3>
-                <p>Achieve your muscle growth goals with this intense 12-week mass gain program.</p>
-                <span class="price">£49.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
+            {% for plan in plans %}
+            <div class="plan-card" data-category="{{ plan.plan_type }}">
+                <h3>{{ plan.title }}</h3>
+                <p>{{ plan.description }}</p>
+                <span class="price">£{{ plan.price }}</span>
+                <a class="btn add-to-cart" href="{% url 'add_to_cart' plan.id %}">Add to Cart</a>
             </div>
-
-            <!-- Nutrition Plan Card 1 -->
-            <div class="plan-card" data-category="nutrition">
-                <h3>Lean Muscle Nutrition Plan</h3>
-                <p>A complete nutrition plan focused on supporting lean muscle growth and fat loss.</p>
-                <span class="price">£29.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
-
-            <!-- Workout Plan Card 2 -->
-            <div class="plan-card" data-category="workout">
-                <h3>Strength Building Workout Plan</h3>
-                <p>This 8-week plan is designed to maximize your strength and power in the gym.</p>
-                <span class="price">£39.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
-
-            <!-- Nutrition Plan Card 2 -->
-            <div class="plan-card" data-category="nutrition">
-                <h3>Fat Loss Nutrition Plan</h3>
-                <p>Lose fat efficiently with this structured meal plan and nutritional guidance.</p>
-                <span class="price">£24.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
-
-            <!-- Workout Plan Card 3 -->
-            <div class="plan-card" data-category="workout">
-                <h3>HIIT Cardio Workout Plan</h3>
-                <p>Burn fat and improve your endurance with this 6-week high-intensity interval training plan.</p>
-                <span class="price">£34.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
-
-            <!-- Nutrition Plan Card 3 -->
-            <div class="plan-card" data-category="nutrition">
-                <h3>Vegan Nutrition Plan</h3>
-                <p>A 4-week vegan meal plan designed for optimal nutrient intake and performance.</p>
-                <span class="price">£19.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
-
-            <!-- Workout Plan Card 4 -->
-            <div class="plan-card" data-category="workout">
-                <h3>Endurance Athlete Plan</h3>
-                <p>Improve your endurance with this structured workout plan tailored for athletes.</p>
-                <span class="price">£44.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
-
-            <!-- Nutrition Plan Card 4 -->
-            <div class="plan-card" data-category="nutrition">
-                <h3>Keto Diet Plan</h3>
-                <p>A ketogenic meal plan to help you achieve fat loss while maintaining energy levels.</p>
-                <span class="price">£34.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
-
-            <!-- Workout Plan Card 5 -->
-            <div class="plan-card" data-category="workout">
-                <h3>Full Body Home Workout Plan</h3>
-                <p>A 4-week full-body workout plan that can be done at home with minimal equipment.</p>
-                <span class="price">£19.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
-
-            <!-- Nutrition Plan Card 5 -->
-            <div class="plan-card" data-category="nutrition">
-                <h3>Gluten-Free Nutrition Plan</h3>
-                <p>This 4-week gluten-free nutrition plan helps you stay healthy and feel energized.</p>
-                <span class="price">£22.99</span>
-                <button class="btn add-to-cart">Add to Cart</button>
-            </div>
+            {% empty %}
+            <p>No plans available.</p>  <!-- Это сообщение появится, если планов нет -->
+            {% endfor %}
         </div>
+        
     </div>
 </section>
 {% endblock %}

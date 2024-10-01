@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}VitaForce{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
         <div class="logo">
             <a href="/"><img src="{% static 'media/logo/vitaforce-background.png' %}" alt="VitaForce Logo"></a>
         </div>
-
+    
         <!-- Full Navigation Links for Desktop -->
         <ul class="nav-links" id="desktop-nav">
             <li><a href="/">Home</a></li>
@@ -23,16 +24,33 @@
             <li><a href="/shop">Shop</a></li>
             <li><a href="/about">About Us</a></li>
             <li><a href="/support">Support</a></li>
-            <li><a href="/cart">Cart</a></li>
+    
             {% if request.user.is_authenticated %}
+            <!-- Links for authenticated users -->
             <li><a href="/account">Account</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/cart">Cart</a></li>
+    
+            <!-- Admin Dashboard Link, only visible for administrators -->
+            {% if is_admin %}
+            <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+            {% endif %}
+    
+            <!-- Logout Button -->
+            <li>
+                <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="out-btn">Logout</button>
+                </form>
+            </li>
+            {% else %}
+            <!-- Login Link, only visible for non-authenticated users -->
+            <li><a href="{% url 'login' %}">Login</a></li>
             {% endif %}
         </ul>
-
+    
         <!-- Hamburger Icon for Mobile -->
         <div class="hamburger" id="hamburger">&#9776;</div>
-
+    
         <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobile-menu">
             <span class="close-btn" id="close-btn">&times;</span>
@@ -42,14 +60,33 @@
                 <li><a href="/shop">Shop</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/support">Support</a></li>
-                <li><a href="/cart">Cart</a></li>
+    
                 {% if request.user.is_authenticated %}
+                <!-- Links for authenticated users in mobile view -->
                 <li><a href="/account">Account</a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li><a href="/cart">Cart</a></li>
+    
+                <!-- Admin Dashboard Link, only visible for administrators -->
+                {% if is_admin %}
+                <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+                {% endif %}
+    
+                <!-- Logout Button -->
+                <li>
+                    <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">Logout</button>
+                    </form>
+                </li>
+                {% else %}
+                <!-- Login Link, only visible for non-authenticated users in mobile view -->
+                <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
+    
+
     <!-- Messages -->
     {% if messages %}
     <ul class="messages">
@@ -88,7 +125,6 @@
         </div>
     </footer>
 
-    <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 

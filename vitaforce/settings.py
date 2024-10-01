@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'vitaforce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'vitaforce_db1',
+        'USER': 'vitaforce_1',
+        'PASSWORD': 'UzKLM8Z4Aa7FmF21',
+        'HOST': 'sql157.your-server.de',
+        #'PORT': '', 
     }
 }
 
@@ -117,8 +121,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/assets/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'assets'),
+]
 
 
 # Default primary key field type
@@ -131,3 +137,10 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+# Stripe API keys (test keys)
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Q4xFAKibZSSYRT7R06Ku1taYZBTEh6lm7C6QUp3MloEcspCnZ7sn9jckvB1DxLo6fbBCXpUqMneF3lBIiBNhGYH006trN3V0k'
+STRIPE_SECRET_KEY = 'sk_test_51Q4xFAKibZSSYRT7c7JJBeQV0C7rrgDBll08q3E8apW3RVzcncBPrQkrSfeBmLbxWzte2IPlFEPXGm3imnbOdSCw00C4lwBGKk'
+
+# Favicon settings
+

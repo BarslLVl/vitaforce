@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<section class="profile-section">
+    <div class="container">
+        <h2>{{ user.username }}'s Profile</h2>
+        
+        <!-- Form to add a new post -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Post</button>
+        </form>
+
+        <h3>Your Updates</h3>
+        <!-- Display the user's posts -->
+        <ul>
+            {% for post in posts %}
+                <li>{{ post.content }} <br> <small>Posted on {{ post.created_at }}</small></li>
+            {% empty %}
+                <li>No updates yet. Start sharing your progress!</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}
