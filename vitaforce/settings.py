@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'vitaforce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vitaforce_db1',
-        'USER': 'vitaforce_1',
-        'PASSWORD': 'UzKLM8Z4Aa7FmF21',
-        'HOST': 'sql157.your-server.de',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         #'PORT': '', 
     }
 }
@@ -139,8 +139,7 @@ MESSAGE_TAGS = {
 }
 
 # Stripe API keys (test keys)
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Q4xFAKibZSSYRT7R06Ku1taYZBTEh6lm7C6QUp3MloEcspCnZ7sn9jckvB1DxLo6fbBCXpUqMneF3lBIiBNhGYH006trN3V0k'
-STRIPE_SECRET_KEY = 'sk_test_51Q4xFAKibZSSYRT7c7JJBeQV0C7rrgDBll08q3E8apW3RVzcncBPrQkrSfeBmLbxWzte2IPlFEPXGm3imnbOdSCw00C4lwBGKk'
+
 
 # Favicon settings
 
