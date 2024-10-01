@@ -10,38 +10,46 @@
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
             <a href="/"><img src="{% static 'media/logo/vitaforce-background.png' %}" alt="VitaForce Logo"></a>
         </div>
-        <ul class="nav-links">
+
+        <!-- Full Navigation Links for Desktop -->
+        <ul class="nav-links" id="desktop-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/plans">Plans</a></li>
             <li><a href="/shop">Shop</a></li>
             <li><a href="/about">About Us</a></li>
             <li><a href="/support">Support</a></li>
             <li><a href="/cart">Cart</a></li>
-
             {% if request.user.is_authenticated %}
-            <!-- Profile Icon and Dropdown for logged-in users -->
-            <li class="profile-icon">
-                <img src="{% static 'media/user/user.png' %}" alt="User Profile" id="profile-icon">
-                <div class="dropdown-menu" id="profile-menu">
-                    <a href="/profile">My Profile</a>
-                    <a href="/my-plan">My Plan</a>
-                    <a href="/settings">Settings</a>
-                    <a href="/notifications">Notifications</a>
-                    <a href="/logout">Logout</a>
-                </div>
-            </li>
-            {% else %}
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/account">Account</a></li>
+            <li><a href="/logout">Logout</a></li>
             {% endif %}
         </ul>
-    </nav>
 
+        <!-- Hamburger Icon for Mobile -->
+        <div class="hamburger" id="hamburger">&#9776;</div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <span class="close-btn" id="close-btn">&times;</span>
+            <ul class="mobile-nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/plans">Plans</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/cart">Cart</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="/account">Account</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
     <!-- Messages -->
     {% if messages %}
     <ul class="messages">
@@ -80,6 +88,7 @@
         </div>
     </footer>
 
+    <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 

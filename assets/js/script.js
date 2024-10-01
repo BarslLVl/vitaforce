@@ -60,24 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Profile Dropdown functionality
-    const profileIcon = document.getElementById('profile-icon');
-    const profileMenu = document.getElementById('profile-menu');
-
-    if (profileIcon && profileMenu) {
-        // Toggle dropdown on icon click
-        profileIcon.addEventListener('click', function () {
-            profileMenu.classList.toggle('show');
-        });
-
-        // Close dropdown if clicked outside
-        document.addEventListener('click', function (e) {
-            if (!profileIcon.contains(e.target) && !profileMenu.contains(e.target)) {
-                profileMenu.classList.remove('show');
-            }
-        });
-    }
-
     // Plan Filter functionality (Only for pages with plans)
     const currentPath = window.location.pathname;
     if (currentPath === '/shop/' || currentPath === '/plans/') {
@@ -140,4 +122,13 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+});
+
+// Mobile menu functionality
+document.getElementById("hamburger").addEventListener("click", function() {
+    document.getElementById("mobile-menu").classList.add("open");
+});
+
+document.getElementById("close-btn").addEventListener("click", function() {
+    document.getElementById("mobile-menu").classList.remove("open");
 });
