@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Purchases & Plans{% endblock %}
+
+{% block content %}
+<div class="account-container">
+    <h3>Purchased Products</h3>
+    <ul>
+        {% for order in orders %}
+        <li>{{ order.plan.title }} - £{{ order.amount }}</li>
+        {% empty %}
+        <li>You have no purchases yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>My Plans</h3>
+    <ul>
+        {% for plan in plans %}
+        <li>{{ plan.title }} - £{{ plan.price }}</li>
+        {% empty %}
+        <li>You have no plans yet.</li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

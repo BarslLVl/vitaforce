@@ -1,40 +1,77 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Checkout{% endblock %}
 
 {% block content %}
 <section class="checkout-section">
     <div class="container">
-        <h2 class="section-title">Checkout for {{ plan.title }}</h2>
+        <h2>Checkout</h2>
+        
+        <!-- Display the items and total amount for checkout -->
         <div class="checkout-details">
-            <p class="plan-price">Price: <span>£{{ plan.price }}</span></p>
+            <table class="checkout-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>
+                            {% if item.plan %}
+                                {{ item.plan.title }}
+                            {% elif item.product %}
+                                {{ item.product.name }}
+                            {% else %}
+                                Unknown Item
+                            {% endif %}
+                        </td>
+                        <td>{{ item.quantity }}</td>
+                        <td>
+                            {% if item.plan %}
+                                £{{ item.plan.price }}
+                            {% elif item.product %}
+                                £{{ item.product.price }}
+                            {% else %}
+                                £0.00
+                            {% endif %}
+                        </td>
+                        <td>£{{ item.get_total_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-            <form id="payment-form" class="payment-form">
-                <div id="card-element" class="card-element">
-                    <!-- Stripe Elements will create the card input here -->
-                </div>
+            <div class="checkout-summary">
+                <h3>Total: <span>£{{ total_price }}</span></h3>
+            </div>
+        </div>
 
-                <!-- Error message placeholder -->
+        <!-- Payment Form -->
+        <div class="payment-form-wrapper">
+            <form id="payment-form">
+                <h4>Enter Your Payment Details</h4>
+                <div id="card-element" class="stripe-input"></div>
                 <div id="error-message" role="alert" class="error-message"></div>
-
-                <!-- Submit button -->
-                <button id="submit" class="btn checkout-btn">Pay £{{ plan.price }}</button>
+                <button id="submit" class="btn checkout-btn">Pay</button>
             </form>
         </div>
     </div>
 </section>
 
-<!-- Load Stripe.js library -->
-<script src="https://js.stripe.com/v3/"></script>
-
-<!-- Pass necessary variables to the script.js -->
+<!-- Add Stripe and custom scripts -->
 <script>
     var stripe_publishable_key = "{{ stripe_publishable_key }}";
     var client_secret = "{{ client_secret }}";
     var user_name = "{{ request.user.username }}";
     var payment_success_url = "{% url 'payment_success' %}";
+    var payment_failure_url = "{% url 'payment_failure' %}";
 </script>
-
-<!-- Include the script.js file -->
+<script src="https://js.stripe.com/v3/"></script>
 <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

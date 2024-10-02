@@ -10,7 +10,7 @@
         <!-- Filter buttons -->
         <div class="filter-buttons">
             <button class="filter-btn active" data-filter="all">All Plans</button>
-            <button class="filter-btn" data-filter="workout">Workout Plans</button>
+            <button class="filter-btn" data-filter="exercise">Exercise Plans</button>
             <button class="filter-btn" data-filter="nutrition">Nutrition Plans</button>
         </div>
 
@@ -24,7 +24,7 @@
                 <a class="btn add-to-cart" href="{% url 'add_to_cart' plan.id %}">Add to Cart</a>
             </div>
             {% empty %}
-            <p>No plans available.</p>  <!-- Это сообщение появится, если планов нет -->
+            <p>No plans available.</p>
             {% endfor %}
         </div>
         

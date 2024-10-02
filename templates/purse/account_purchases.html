@@ -1,0 +1,25 @@
+<h3>My Purchases</h3>
+<table class="purchase-table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Date Purchased</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.plan.title|default:order.product.name }}</td>
+            <td>{{ order.plan.plan_type|default:"Product" }}</td>
+            <td>£{{ order.amount }}</td>
+            <td>{{ order.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No purchases yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

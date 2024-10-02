@@ -1,23 +1,16 @@
-{% extends "admin/base.html" %}
-
+{% extends "admin/admin_base.html" %}
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
-    <div class="admin-dashboard">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
-                    <li><a href="{% url 'admin_plans' %}">Manage Plans</a></li>
-                    <li><a href="{% url 'admin_products' %}">Manage Products</a></li>
-                    <li><a href="{% url 'admin_users' %}">Manage Users</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="admin-content">
-            <h1>Welcome to the Admin Dashboard</h1>
-            <p>From here, you can manage plans, products, and users.</p>
-        </main>
-    </div>
+<div class="container">
+    <h2>Admin Dashboard</h2>
+    <nav>
+        <ul>
+            <li><a href="{% url 'admin_dashboard' %}">Dashboard Home</a></li>
+            <li><a href="{% url 'admin_users' %}">Manage Users</a></li>
+            <li><a href="{% url 'admin_products' %}">Manage Products</a></li>
+            <li><a href="{% url 'admin_plans' %}">Manage Plans</a></li>
+        </ul>
+    </nav>
+</div>
 {% endblock %}

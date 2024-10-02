@@ -9,7 +9,7 @@
         <table class="cart-table">
             <thead>
                 <tr>
-                    <th>Plan</th>
+                    <th>Item</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Total</th>
@@ -19,9 +19,21 @@
             <tbody>
                 {% for item in cart_items %}
                 <tr>
-                    <td>{{ item.plan.title }}</td>
+                    <td>
+                        {% if item.plan %}
+                            {{ item.plan.title }}
+                        {% elif item.product %}
+                            {{ item.product.name }}
+                        {% endif %}
+                    </td>
                     <td>{{ item.quantity }}</td>
-                    <td>£{{ item.plan.price }}</td>
+                    <td>
+                        {% if item.plan %}
+                            £{{ item.plan.price }}
+                        {% elif item.product %}
+                            £{{ item.product.price }}
+                        {% endif %}
+                    </td>
                     <td>£{{ item.get_total_price }}</td>
                     <td>
                         <a href="{% url 'remove_from_cart' item.id %}" class="btn remove-btn">Remove</a>
@@ -36,7 +48,7 @@
         </table>
         <div class="cart-total">
             <h3>Total: £{{ total_price }}</h3>
-            <a href="#" class="btn checkout-btn">Proceed to Checkout</a>
+            <a href="{% url 'checkout' %}" class="btn checkout-btn">Proceed to Checkout</a>
         </div>
     </div>
 </section>

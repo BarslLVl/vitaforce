@@ -5,17 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Admin Panel{% endblock %}</title>
-    <!-- Ссылка на CSS для админов -->
     <link rel="stylesheet" href="{% static 'css/admin/styles.css' %}">
 </head>
 <body>
-    <!-- Admin content here -->
-
-    {% block content %}
-    <!-- Контент админ страниц -->
-    {% endblock %}
-
-    <!-- Ссылка на JavaScript для админов -->
+    <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+    </div>
+    
+    <div class="admin-content">
+        {% block content %}
+        <!-- Content will go here -->
+        {% endblock %}
+    </div>
+    
     <script src="{% static 'js/admin/script.js' %}"></script>
 </body>
 </html>

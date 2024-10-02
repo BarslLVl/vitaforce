@@ -9,11 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to show the current slide and hide others
     function showSlide(index) {
         slides.forEach((slide, i) => {
-            if (i === index) {
-                slide.classList.add('active');
-            } else {
-                slide.classList.remove('active');
-            }
+            slide.classList.toggle('active', i === index);
         });
     }
 
@@ -32,14 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
         showSlide(slideIndex);
     }
 
-    // Check if the buttons exist and add event listeners
-    if (prevButton) {
-        prevButton.addEventListener('click', showPrevSlide);
-    }
-
-    if (nextButton) {
-        nextButton.addEventListener('click', showNextSlide);
-    }
+    // Add event listeners to prev/next buttons
+    prevButton?.addEventListener('click', showPrevSlide);
+    nextButton?.addEventListener('click', showNextSlide);
 
     // Automatic slide change every 10 seconds
     setInterval(showNextSlide, 10000);
@@ -66,32 +57,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const filterButtons = document.querySelectorAll('.filter-btn');
         const planCards = document.querySelectorAll('.plan-card');
 
-        if (filterButtons.length > 0 && planCards.length > 0) {
-            // Add event listener to each filter button
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const filter = this.getAttribute('data-filter');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const filter = this.getAttribute('data-filter');
 
-                    // Loop through each plan card and filter by category
-                    planCards.forEach(card => {
-                        const category = card.getAttribute('data-category');
-                        if (filter === 'all' || category === filter) {
-                            card.style.display = 'block'; // Show matching plans
-                        } else {
-                            card.style.display = 'none'; // Hide non-matching plans
-                        }
-                    });
-
-                    // Remove active class from all buttons
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-
-                    // Add active class to the clicked button
-                    this.classList.add('active');
+                planCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    card.style.display = (filter === 'all' || category === filter) ? 'block' : 'none';
                 });
+
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
             });
-        } else {
-            console.error('Filter buttons or plan cards not found!');
-        }
+        });
     }
 
     // Product Filter functionality (Only for shop page)
@@ -99,82 +77,66 @@ document.addEventListener('DOMContentLoaded', function () {
         const filterButtons = document.querySelectorAll('.filter-btn');
         const productCards = document.querySelectorAll('.product-card');
 
-        // Add event listener to each filter button
         filterButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const filter = this.getAttribute('data-filter');
 
-                // Loop through each product card and filter by category
                 productCards.forEach(card => {
                     const category = card.getAttribute('data-category');
-                    if (filter === 'all' || category === filter) {
-                        card.style.display = 'block'; // Show matching products
-                    } else {
-                        card.style.display = 'none'; // Hide non-matching products
-                    }
+                    card.style.display = (filter === 'all' || category === filter) ? 'block' : 'none';
                 });
 
-                // Remove active class from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-
-                // Add active class to the clicked button
                 this.classList.add('active');
             });
         });
     }
-});
 
-// Mobile menu functionality
-document.getElementById("hamburger").addEventListener("click", function() {
-    document.getElementById("mobile-menu").classList.add("open");
-});
-
-document.getElementById("close-btn").addEventListener("click", function() {
-    document.getElementById("mobile-menu").classList.remove("open");
-});
-
-// Stripe payment form functionality
-document.addEventListener('DOMContentLoaded', function () {
-    var stripe = Stripe(stripe_publishable_key);
-    var elements = stripe.elements();
-
-    // Create an instance of the card Element
-    var card = elements.create('card');
-    card.mount('#card-element');
-
-    // Handle real-time validation errors from the card Element.
-    card.on('change', function(event) {
-        var displayError = document.getElementById('error-message');
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = '';
-        }
+    // Mobile menu functionality
+    document.getElementById("hamburger")?.addEventListener("click", function() {
+        document.getElementById("mobile-menu").classList.add("open");
     });
 
-    // Handle form submission.
-    var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+    document.getElementById("close-btn")?.addEventListener("click", function() {
+        document.getElementById("mobile-menu").classList.remove("open");
+    });
 
-        stripe.confirmCardPayment(client_secret, {
-            payment_method: {
-                card: card,
-                billing_details: {
-                    name: user_name
-                }
-            }
-        }).then(function(result) {
-            if (result.error) {
-                // Show error to your customer (e.g., insufficient funds)
-                var errorElement = document.getElementById('error-message');
-                errorElement.textContent = result.error.message;
-            } else {
-                // The payment has been processed!
-                if (result.paymentIntent.status === 'succeeded') {
-                    window.location.href = payment_success_url;
-                }
-            }
+    // Stripe payment form functionality
+    const stripeForm = document.getElementById('payment-form');
+    if (stripeForm && typeof Stripe !== 'undefined') {
+        var stripe = Stripe(stripe_publishable_key);
+        var elements = stripe.elements();
+
+        var card = elements.create('card');
+        card.mount('#card-element');
+
+        card.on('change', function(event) {
+            var displayError = document.getElementById('error-message');
+            displayError.textContent = event.error ? event.error.message : '';
         });
-    });
+
+        stripeForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.confirmCardPayment(client_secret, {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: user_name
+                    }
+                }
+            }).then(function(result) {
+                if (result.error) {
+                    // Show error to your customer
+                    document.getElementById('error-message').textContent = result.error.message;
+                } else if (result.paymentIntent.status === 'succeeded') {
+                    // Redirect to success page
+                    window.location.href = payment_success_url;
+                } else {
+                    // Redirect to failure page if payment fails
+                    window.location.href = payment_failure_url;
+                }
+            });
+        });
+    }
 });
