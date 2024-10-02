@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#p(xd7mxreq_%fo37vd9kj7a!a&9#1-j(5!poc(oxosjg%o!)l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vitaforce.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['vitaforce-5cdb921ba1f0.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
