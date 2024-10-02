@@ -118,8 +118,25 @@ Stay connected and be part of the growing VitaForce community!
 - **Stack Overflow**: [https://stackoverflow.com/](https://stackoverflow.com/)
   - A helpful resource for troubleshooting issues and understanding various aspects of coding.
 
+### Accessibility
+![Test](docs/media/testing1.png)
+
 ### Media
 - [Favocons](https://favicon.io) - Used for creating the favicon for the site.
 - [Pngegg](https://www.pngegg.com) - Used for downloading the images used in the site. (e.g., the hero image)
 - [Flaticon](https://www.flaticon.com) - Used for downloading the icons used in the site.
 - DALL·E image generation tool - Used for generating the images used in the site on the main page on the banner section and the logo.
+
+Throughout the development of VitaForce, various online resources and references were used to ensure best practices, modern coding techniques, and industry-standard functionalities.
+
+### YouTube Channels:
+- **[Traversy Media](https://www.youtube.com/c/TraversyMedia)** – This channel provided great insights on web development, specifically Django and e-commerce projects.
+- **[The Net Ninja](https://www.youtube.com/c/TheNetNinja)** – Their tutorials on full-stack development and Django helped me with implementing both user and admin functionalities.
+- **[Academind](https://www.youtube.com/c/Academind)** – Their channel was useful for better understanding complex concepts related to Python and JavaScript frameworks.
+- **[CS50 by Harvard University](https://www.youtube.com/c/cs50)** – Their foundational lessons on full-stack development and project deployment were essential in shaping this project.
+- **[CodingEntrepreneurs](https://www.youtube.com/c/CodingEntrepreneurs)** – Detailed tutorials on Django and Python were incredibly helpful, especially when it came to setting up deployment strategies and improving the backend of the site.
+
+### Other References:
+- Django Official Documentation: [https://docs.djangoproject.com/](https://docs.djangoproject.com/)
+- MDN Web Docs (HTML/CSS/JavaScript): [https://developer.mozilla.org/](https://developer.mozilla.org/)
+- Bootstrap Documentation: [https://getbootstrap.com/docs/](https://getbootstrap.com/docs/)
