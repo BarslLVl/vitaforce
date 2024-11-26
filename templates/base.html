@@ -8,7 +8,8 @@
     <title>{% block title %}VitaForce{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/c4ddbc20620faef8c4ffacfa7/c3b6b8894431406bf5fc6b346.js");</script>
+    <script
+        id="mcjs">!function (c, h, i, m, p) { m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p) }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/c4ddbc20620faef8c4ffacfa7/c3b6b8894431406bf5fc6b346.js");</script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
         <div class="logo">
             <a href="/"><img src="{% static 'media/logo/vitaforce-background.png' %}" alt="VitaForce Logo"></a>
         </div>
-    
+
         <!-- Full Navigation Links for Desktop -->
         <ul class="nav-links" id="desktop-nav">
             <li><a href="/">Home</a></li>
@@ -25,17 +26,15 @@
             <li><a href="/shop">Shop</a></li>
             <li><a href="/about">About Us</a></li>
             <li><a href="/support">Support</a></li>
-    
+
             {% if request.user.is_authenticated %}
             <!-- Links for authenticated users -->
             <li><a href="/account">Account</a></li>
             <li><a href="/cart">Cart</a></li>
-    
+
             <!-- Admin Dashboard Link, only visible for administrators -->
-            {% if is_admin %}
             <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
-            {% endif %}
-    
+
             <!-- Logout Button -->
             <li>
                 <form method="POST" action="{% url 'logout' %}" class="logout-form">
@@ -48,10 +47,10 @@
             <li><a href="{% url 'login' %}">Login</a></li>
             {% endif %}
         </ul>
-    
+
         <!-- Hamburger Icon for Mobile -->
         <div class="hamburger" id="hamburger">&#9776;</div>
-    
+
         <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobile-menu">
             <span class="close-btn" id="close-btn">&times;</span>
@@ -61,17 +60,15 @@
                 <li><a href="/shop">Shop</a></li>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/support">Support</a></li>
-    
+
                 {% if request.user.is_authenticated %}
                 <!-- Links for authenticated users in mobile view -->
                 <li><a href="/account">Account</a></li>
                 <li><a href="/cart">Cart</a></li>
-    
+
                 <!-- Admin Dashboard Link, only visible for administrators -->
-                {% if is_admin %}
                 <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
-                {% endif %}
-    
+
                 <!-- Logout Button -->
                 <li>
                     <form method="POST" action="{% url 'logout' %}" class="logout-form">
@@ -86,7 +83,7 @@
             </ul>
         </div>
     </nav>
-    
+
 
     <!-- Messages -->
     {% if messages %}
@@ -115,6 +112,7 @@
             <div class="social-icons">
                 <a href="https://www.facebook.com/groups/517274627725346" target="_blank">
                     <img src="{% static 'media/icons/facebook.png' %}" alt="Facebook">
+                </a>
             </div>
         </div>
     </footer>

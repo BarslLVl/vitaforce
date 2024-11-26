@@ -12,6 +12,7 @@ VitaForce is a modern and dynamic fitness platform designed to help users achiev
 - **Community Posts**: Users can share their experiences and progress through community posts visible to all members.
 - **Newsletter Signup**: Users can subscribe to receive newsletters and updates on new fitness plans or promotions.
 - **SEO Optimization**: Fully optimized for search engines with proper meta tags, robots.txt, and sitemap.xml for better discoverability.
+- **404 Page**: A user-friendly custom 404 error page with navigation options.
 
 ## Features to be Implemented
 - **Live Chat Support**: A live chat system for customer support and inquiries.
@@ -31,6 +32,12 @@ VitaForce is a modern and dynamic fitness platform designed to help users achiev
 - **Login Redirects**: Fixed issues where users were not redirected properly after logging in or signing up.
 - **Cart Quantity Updates**: Fixed an issue where cart quantities were not updating correctly.
 - **Admin Dashboard Access**: Resolved a problem where some admin functionalities were not properly restricted to admin users only.
+
+## SEO Enhancements
+- **robots.txt**: Configured to allow search engines to index the site efficiently.
+- **sitemap.xml**: Contains structured data for all important pages to improve site crawling.
+- **Meta Tags**: Added meta descriptions to key pages for better search engine visibility.
+- **404 Page**: Custom 404 page ensures users are redirected to meaningful content.
 
 ## Wireframes
 Wireframes were created to visualize the layout and functionality of the website on different devices. You can view these wireframes for the following pages:
@@ -62,13 +69,23 @@ The user experience (UX) design of VitaForce focuses on ease of navigation, simp
 4. Create a new Heroku app using `heroku create app-name-here`.
 5. Modify the `ALLOWED_HOSTS` in the `settings.py` file to include your Heroku app name.
 6. Add environment variables in Heroku under the Settings tab:
-   - `DATABASE_NAME`, `DATABASE_USER`, `DATABASE_PASSWORD`, `DATABASE_HOST`, `DATABASE_PORT`, `SECRET_KEY`, `mybookingr35t`
+   - `DATABASE_NAME`, `DATABASE_USER`, `DATABASE_PASSWORD`, `DATABASE_HOST`, `DATABASE_PORT`, `SECRET_KEY`, `STRIPE_KEYS`
 7. Set the Heroku stack to container with `heroku stack:set container -a app-name-here`.
 8. Create a PostgreSQL database with `heroku addons:create heroku-postgresql:hobby-dev -a app-name-here`.
 9. Push the code to Heroku using `git push heroku master`.
 10. Run migrations with `heroku run python manage.py migrate`.
 11. Create a superuser with `heroku run python manage.py createsuperuser`.
 
+## Testing
+### Manual Testing
+- Verified that all forms provide appropriate validation messages.
+- Confirmed that the e-commerce payment system correctly handles both successful and failed payments.
+- Checked navigation links to ensure there are no broken links across the website.
+- Tested 404 error handling for non-existent pages.
+
+### Automated Testing
+- Used Django's built-in testing framework to validate models and views.
+- Wrote unit tests for core functionalities, such as CRUD operations and payment processing.
 
 ## Social Media
 
@@ -77,7 +94,6 @@ VitaForce is active on social media to engage with our users and provide updates
 - **Facebook Page**: [VitaForce on Facebook](https://www.facebook.com/groups/517274627725346) ![Facebook](docs/media/facebook-group.png)
 
 Stay connected and be part of the growing VitaForce community!
-
 
 ## Credits
 

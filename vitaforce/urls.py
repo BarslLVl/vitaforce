@@ -6,6 +6,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse
 from django.views.generic import TemplateView
+from users.views import admin_roles
+from users.views import payment_failure_view
 
 from django.conf.urls import handler404
 from django.shortcuts import render
@@ -30,9 +32,9 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('all-posts/', views.all_posts_view, name='all_posts'),
     path('checkout/', views.checkout, name='checkout'),
-    path('payment-success/', views.payment_success_view, name='payment_success'),
+    path('payment_success/', views.payment_success, name='payment_success'),
+    path('payment-failure/', payment_failure_view, name='payment_failure'),
     path('add-to-cart/product/<int:product_id>/', views.add_to_cart_product, name='add_to_cart_product'),
-    path('payment-failure/', views.payment_failure_view, name='payment_failure'),
 
     # Admin Dashboard routes
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
@@ -46,6 +48,8 @@ urlpatterns = [
     path('admin/delete_product/<int:product_id>/', views.delete_product, name='delete_product'),
     path('admin/users/', views.admin_users, name='admin_users'),
     path('admin/users/edit/<int:user_id>/', views.edit_user, name='edit_user'),
+    path('admin/roles/', admin_roles, name='admin_roles'),
+    
 
     # Django Admin
     path('admin/', admin.site.urls),
@@ -71,3 +75,10 @@ def robots_txt(request):
         "Sitemap: /sitemap.xml",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+from users.views import CreateCheckoutSessionView
+
+urlpatterns += [
+    path('create-checkout-session/', CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
+]
+    

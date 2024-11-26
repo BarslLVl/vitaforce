@@ -1471,6 +1471,53 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
+/* Error Page Styles  */
+.error-page {
+    text-align: center;
+    margin-top: 10%;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background: linear-gradient(135deg, #f3f4f6, #eaecef);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 10% auto;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.error-message {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: #555;
+}
+
+.error-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.error-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
 /* Make the page responsive */
 @media (max-width: 768px) {
     .account-content {

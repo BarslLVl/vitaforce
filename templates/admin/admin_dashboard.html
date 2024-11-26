@@ -1,16 +1,29 @@
 {% extends "admin/admin_base.html" %}
-{% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h2>Admin Dashboard</h2>
-    <nav>
-        <ul>
-            <li><a href="{% url 'admin_dashboard' %}">Dashboard Home</a></li>
-            <li><a href="{% url 'admin_users' %}">Manage Users</a></li>
-            <li><a href="{% url 'admin_products' %}">Manage Products</a></li>
-            <li><a href="{% url 'admin_plans' %}">Manage Plans</a></li>
-        </ul>
-    </nav>
+    <h1>Admin Dashboard</h1>
+    <div class="dashboard-grid">
+        <div class="card">
+            <h2>Manage Users</h2>
+            <p>View and manage user information, roles, and permissions.</p>
+            <a href="{% url 'admin_users' %}" class="btn">Go to Users</a>
+        </div>
+        <div class="card">
+            <h2>Manage Products</h2>
+            <p>Add, edit, and delete products in your shop.</p>
+            <a href="{% url 'admin_products' %}" class="btn">Go to Products</a>
+        </div>
+        <div class="card">
+            <h2>Manage Plans</h2>
+            <p>Create, update, or delete subscription plans.</p>
+            <a href="{% url 'admin_plans' %}" class="btn">Go to Plans</a>
+        </div>
+        <div class="card">
+            <h2>Role Management</h2>
+            <p>Assign and update user roles and permissions.</p>
+            <a href="{% url 'admin_roles' %}" class="btn">Go to Roles</a>
+        </div>
+    </div>
 </div>
 {% endblock %}

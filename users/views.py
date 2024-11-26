@@ -8,8 +8,31 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from .models import Post, Plan, CartItem, Order, Product
 from .forms import PostForm, PlanForm, ProductForm, UserEditForm
+from django.http import JsonResponse
+# Stripe test API key
+stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+def checkout(request):
+    if request.method == 'POST':
+        try:
+            
+            intent = stripe.PaymentIntent.create(
+                amount=1299,
+                currency='gbp',
+                payment_method=request.POST['payment_method_id'],
+                confirm=True,
+            )
+            return JsonResponse({'success': True})
+        except stripe.error.CardError as e:
+            return JsonResponse({'error': str(e)})
+
+    return render(request, 'purse/checkout.html')
+
+def payment_success(request):
+    return render(request, 'purse/payment_success.html')
+
+def payment_failure(request):
+    return render(request, 'purse/payment_failure.html')
 
 def custom_authenticate(username_or_email, password):
     try:
@@ -20,6 +43,11 @@ def custom_authenticate(username_or_email, password):
 
     user = authenticate(username=username, password=password)
     return user
+
+def base_context_processor(request):
+    return {
+        'is_admin': request.user.groups.filter(name='Administrator').exists() if request.user.is_authenticated else False,
+    }
 
 def login_view(request):
     if request.method == "POST":
@@ -126,23 +154,27 @@ def cart_view(request):
     return render(request, 'purse/cart.html', {'cart_items': cart_items, 'total_price': total_price})
 
 @login_required
+
+@login_required
 def checkout(request):
     cart_items = CartItem.objects.filter(user=request.user)
     total_price = sum([item.get_total_price() for item in cart_items])
 
     if request.method == "POST":
-        intent = stripe.PaymentIntent.create(
-            amount=int(total_price * 100),
-            currency='gbp',
-            payment_method_types=['card'],
-        )
-
-        return render(request, 'purse/checkout.html', {
-            'client_secret': intent.client_secret,
-            'stripe_publishable_key': settings.STRIPE_PUBLISHABLE_KEY,
-            'cart_items': cart_items,
-            'total_price': total_price
-        })
+        # Process payment intent
+        try:
+            intent = stripe.PaymentIntent.create(
+                amount=int(total_price * 100),
+                currency='gbp',
+                payment_method=request.POST.get('payment_method_id'),
+                confirm=True
+            )
+            # If successful, create an order and clear the cart
+            Order.objects.create(user=request.user, total_price=total_price)
+            cart_items.delete()
+            return JsonResponse({'success': True})
+        except stripe.error.CardError as e:
+            return JsonResponse({'error': str(e)})
 
     return render(request, 'purse/checkout.html', {
         'cart_items': cart_items,
@@ -150,7 +182,6 @@ def checkout(request):
         'stripe_publishable_key': settings.STRIPE_PUBLISHABLE_KEY
     })
 
-@login_required
 def payment_success_view(request):
     return render(request, 'purse/payment_success.html')
 
@@ -311,6 +342,10 @@ def edit_product(request, product_id):
     return render(request, 'admin/edit_product.html', {'form': form, 'product': product})
 
 @login_required
+def admin_roles(request):
+    return render(request, 'admin/admin_roles.html')
+
+@login_required
 def delete_product(request, product_id):
     if not request.user.groups.filter(name='Administrator').exists():
         return redirect('home')
@@ -395,3 +430,35 @@ def delete_post(request, post_id):
 def index(request):
     latest_posts = Post.objects.all().order_by('-created_at')[:5]
     return render(request, 'user/index.html', {'latest_posts': latest_posts})
+
+from django.views import View
+from django.http import JsonResponse
+import stripe
+
+class CreateCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        YOUR_DOMAIN = "http://127.0.0.1:8000"  # Adjust as needed
+        try:
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data': {
+                            'currency': 'gbp',
+                            'product_data': {
+                                'name': 'Example Product',
+                            },
+                            'unit_amount': 2000,  # Amount in pence (20.00 GBP)
+                        },
+                        'quantity': 1,
+                    },
+                ],
+                mode='payment',
+                success_url=YOUR_DOMAIN + '/success/',
+                cancel_url=YOUR_DOMAIN + '/cancel/',
+            )
+            return JsonResponse({
+                'id': checkout_session.id
+            })
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)

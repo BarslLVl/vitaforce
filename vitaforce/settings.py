@@ -11,25 +11,22 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Load environment variables from .env file
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Security settings
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+DEBUG = False
+ALLOWED_HOSTS = ["*", "vitaforce-fb156818b9dc.herokuapp.com", "127.0.0.1", "localhost"]
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#p(xd7mxreq_%fo37vd9kj7a!a&9#1-j(5!poc(oxosjg%o!)l'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['vitaforce-5cdb921ba1f0.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,33 +61,27 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #'users.context_processors.base_context_processor',
             ],
         },
     },
 ]
 
-
 WSGI_APPLICATION = 'vitaforce.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# Database settings
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vitaforce_db1',
-        'USER': 'vitaforce_1',
-        'PASSWORD': 'UzKLM8Z4Aa7FmF21',
-        'HOST': 'sql157.your-server.de',
-        #'PORT': '', 
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        #'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -106,45 +97,33 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'assets'),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from django.contrib.messages import constants as messages
-
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-# Stripe API keys (test keys)
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Q4xFAKibZSSYRT7R06Ku1taYZBTEh6lm7C6QUp3MloEcspCnZ7sn9jckvB1DxLo6fbBCXpUqMneF3lBIiBNhGYH006trN3V0k'
-STRIPE_SECRET_KEY = 'sk_test_51Q4xFAKibZSSYRT7c7JJBeQV0C7rrgDBll08q3E8apW3RVzcncBPrQkrSfeBmLbxWzte2IPlFEPXGm3imnbOdSCw00C4lwBGKk'
+# Stripe configuration
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 
-# Favicon settings
 
+# Stripe API keys
+STRIPE_TEST_PUBLIC_KEY = "pk_test_51Q4xFAKibZSSYRT7R06Ku1taYZBTEh6lm7C6QUp3MloEcspCnZ7sn9jckvB1DxLo6fbBCXpUqMneF3lBIiBNhGYH006trN3V0k"
+STRIPE_TEST_SECRET_KEY = "pk_test_51Q4xFAKibZSSYRT7R06Ku1taYZBTEh6lm7C6QUp3MloEcspCnZ7sn9jckvB1DxLo6fbBCXpUqMneF3lBIiBNhGYH006trN3V0k"
