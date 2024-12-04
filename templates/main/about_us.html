@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - VitaForce{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">About Us</h1>
+
+    <!-- Our Mission and Vision -->
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'media/about/team0.png' %}" alt="Our Team" class="img-fluid rounded">
+        </div>
+        <div class="col-md-6">
+            <h2>Our Mission</h2>
+            <p>
+                At VitaForce, we believe in empowering individuals to live healthier and more fulfilling lives. 
+                Our team of fitness and nutrition experts is dedicated to providing personalized plans that cater 
+                to your unique goals and needs.
+            </p>
+            <h2>Our Vision</h2>
+            <p>
+                We strive to create a global community where individuals support and inspire each other to achieve 
+                their fitness and wellness aspirations. Together, we can build a healthier world.
+            </p>
+        </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <div class="mt-5">
+        <h2 class="text-center">Why Choose Us?</h2>
+        <div class="row mt-4">
+            <div class="col-md-4 text-center">
+                <div class="why-card">
+                    <i class="bi bi-gem feature-icon"></i>
+                    <h5 class="mt-3">Premium Quality</h5>
+                    <p>We provide top-tier services and plans, ensuring the best results for your journey.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="why-card">
+                    <i class="bi bi-people-fill feature-icon"></i>
+                    <h5 class="mt-3">Supportive Community</h5>
+                    <p>Join a community of like-minded individuals supporting each other’s journeys.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="why-card">
+                    <i class="bi bi-award-fill feature-icon"></i>
+                    <h5 class="mt-3">Expert Guidance</h5>
+                    <p>Access to top-notch trainers and nutritionists dedicated to your success.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Story Section -->
+    <div class="mt-5 p-4 bg-light rounded">
+        <h2 class="text-center">Our Story</h2>
+        <p>
+            VitaForce was founded with a vision to combine the best of fitness, nutrition, and community support. 
+            Starting from a small local gym, we have grown into a platform that serves thousands of individuals globally. 
+            Our focus has always been on providing holistic solutions to help our members achieve their wellness goals.
+        </p>
+    </div>
+
+    <!-- Meet Our Team Section -->
+    <div class="row mt-5">
+        <div class="col-md-12 text-center">
+            <h2>Meet Our Team</h2>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="team-card">
+                <img src="{% static 'media/about/team3.png' %}" alt="Team Member 1" class="team-img">
+                <div class="team-info">
+                    <h5 class="team-name">Jennie Conway</h5>
+                    <p class="team-role">Founder & CEO</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="team-card">
+                <img src="{% static 'media/about/team2.png' %}" alt="Team Member 2" class="team-img">
+                <div class="team-info">
+                    <h5 class="team-name">Jane Smith</h5>
+                    <p class="team-role">Nutrition Specialist</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4">
+            <div class="team-card">
+                <img src="{% static 'media/about/team1.png' %}" alt="Team Member 3" class="team-img">
+                <div class="team-info">
+                    <h5 class="team-name">Mark Johnson</h5>
+                    <p class="team-role">Fitness Trainer</p>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+{% endblock %}

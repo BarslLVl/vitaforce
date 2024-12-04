@@ -1,1 +1,0 @@
-web: gunicorn vitaforce.wsgi --log-file -

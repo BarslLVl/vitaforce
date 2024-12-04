@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - VitaForce{% endblock %}
+
+{% block content %}
+<div class="hero-banner-wrapper">
+    <div class="hero-banner">
+        <div class="hero-content">
+            <h1>Welcome to VitaForce</h1>
+            <p>Your ultimate fitness and wellness community.</p>
+            <a href="/signup/" class="btn btn-primary btn-lg mt-3">Get Started</a>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container mt-5">
+    <h2 class="text-center">Features</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon-wrapper">
+                    <i class="bi bi-people-fill"></i>
+                </div>
+                <h5 class="mt-3">Supportive Community</h5>
+                <p>Connect with like-minded people and share your journey.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon-wrapper">
+                    <i class="bi bi-star-fill"></i>
+                </div>
+                <h5 class="mt-3">Expert Guidance</h5>
+                <p>Plans designed by professionals tailored to your goals.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon-wrapper">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
+                <h5 class="mt-3">Holistic Approach</h5>
+                <p>Focus on both fitness and nutrition for maximum results.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Plans Section -->
+<div class="container mt-5">
+    <h2 class="text-center">Our Plans</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'media/plans/plan1.jpg' %}" class="card-img-top" alt="Workout Plans">
+                <div class="card-body">
+                    <h5 class="card-title">Workout Plans</h5>
+                    <p class="card-text">Customized plans to help you reach your fitness goals.</p>
+                    <a href="/shop/" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'media/plans/plan3.jpg' %}" class="card-img-top" alt="Nutrition Plans">
+                <div class="card-body">
+                    <h5 class="card-title">Nutrition Plans</h5>
+                    <p class="card-text">Expert guidance on healthy eating for your lifestyle.</p>
+                    <a href="/shop/" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'media/plans/plan2.jpg' %}" class="card-img-top" alt="Community">
+                <div class="card-body">
+                    <h5 class="card-title">Join the Community</h5>
+                    <p class="card-text">Share your progress and motivate others.</p>
+                    <a href="/community/" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="mt-5">
+    <h2 class="text-center">What Our Users Say</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"VitaForce completely changed my life. I feel healthier and more energetic
+                    than ever!"</p>
+                <footer class="testimonial-footer">
+                    <div class="name-highlight">— John Doe</div>
+                </footer>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The nutrition plans are amazing. They are easy to follow and really work."
+                </p>
+                <footer class="testimonial-footer">
+                    <div class="name-highlight">— Jane Smith</div>
+                </footer>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"I love the community aspect. It's great to have people who support you."
+                </p>
+                <footer class="testimonial-footer">
+                    <div class="name-highlight">— Mark Johnson</div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FAQ Section -->
+<div class="mt-5">
+    <h2 class="text-center">Frequently Asked Questions</h2>
+    <div class="accordion mt-4" id="faqAccordion">
+        <!-- FAQ 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1"
+                    aria-expanded="true" aria-controls="faqCollapse1">
+                    What is VitaForce?
+                </button>
+            </h2>
+            <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faq1"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    VitaForce is a fitness and wellness community offering personalized workout and nutrition plans
+                    along with a supportive community for achieving your health goals.
+                </div>
+            </div>
+        </div>
+        <!-- FAQ 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                    How can I join?
+                </button>
+            </h2>
+            <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faq2"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Joining VitaForce is easy! Simply sign up using your email and choose a plan that suits your fitness
+                    goals.
+                </div>
+            </div>
+        </div>
+        <!-- FAQ 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                    Are the workout and nutrition plans personalized?
+                </button>
+            </h2>
+            <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faq3"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Yes! Our plans are tailored to your individual goals, preferences, and lifestyle for the best
+                    results.
+                </div>
+            </div>
+        </div>
+        <!-- FAQ 4 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                    What payment methods do you accept?
+                </button>
+            </h2>
+            <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faq4"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    We accept major credit cards and payments through Stripe for secure and seamless transactions.
+                </div>
+            </div>
+        </div>
+        <!-- FAQ 5 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                    Can I cancel my subscription anytime?
+                </button>
+            </h2>
+            <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faq5"
+                data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Absolutely! You can cancel your subscription at any time from your account settings.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Calorie Calculator Section -->
+<div class="container mt-5 p-4 bg-light">
+    <h2 class="text-center">Calorie Calculator</h2>
+    <p class="text-center">Calculate your daily calorie intake based on your goals.</p>
+    <form class="mt-4">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="weight" class="form-label">Weight (kg)</label>
+                <input type="number" class="form-control" id="weight" placeholder="Enter your weight">
+            </div>
+            <div class="col-md-4">
+                <label for="height" class="form-label">Height (cm)</label>
+                <input type="number" class="form-control" id="height" placeholder="Enter your height">
+            </div>
+            <div class="col-md-4">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" placeholder="Enter your age">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="activity" class="form-label">Activity Level</label>
+                <select class="form-select" id="activity">
+                    <option value="sedentary">Sedentary</option>
+                    <option value="lightly_active">Lightly Active</option>
+                    <option value="moderately_active">Moderately Active</option>
+                    <option value="very_active">Very Active</option>
+                </select>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="calculateCalories()">Calculate</button>
+        <p id="calorie-result" class="mt-3 text-center"></p>
+    </form>
+</div>
+{% endblock %}
