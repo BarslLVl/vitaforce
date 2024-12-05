@@ -36,6 +36,41 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+/* Dropdown Menu Alignment Fix */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+    z-index: 1050;
+    padding: 0.5rem 0;
+    margin: 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.navbar .dropdown-menu {
+    min-width: 12rem;
+    max-width: 250px;
+}
+
+/* Responsive Fix for Dropdown */
+@media (max-width: 768px) {
+    .navbar .dropdown-menu {
+        position: static;
+        width: 100%;
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+}
+
 
 /* Buttons in navbar */
 .btn-outline-light:hover {
@@ -289,7 +324,8 @@ body {
     color: #555;
 }
 
-.support-form .form-control, .support-form .form-select {
+.support-form .form-control,
+.support-form .form-select {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
@@ -328,21 +364,197 @@ body {
 }
 
 /* Login and Signup Form */
-.login-form, .signup-form {
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #ddd;
+.signup-form,
+.login-form {
+    background: #ffffff;
     border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.signup-form .form-label,
+.login-form .form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.signup-form input,
+.login-form input {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-form input:focus,
+.login-form input:focus {
+    border-color: #34C759;
+    box-shadow: 0 0 5px rgba(52, 199, 89, 0.3);
+    outline: none;
+}
+
+.signup-form .btn,
+.login-form .btn {
+    background-color: #34C759;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.signup-form .btn:hover,
+.login-form .btn:hover {
+    background-color: #2aa247;
+    transform: translateY(-2px);
+}
+
+.signup-form .btn:active,
+.login-form .btn:active {
+    transform: translateY(0);
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Links */
+.signup-form a.text-decoration-none,
+.login-form a.text-decoration-none {
+    color: #34C759;
+    font-weight: bold;
+}
+
+.signup-form a.text-decoration-none:hover,
+.login-form a.text-decoration-none:hover {
+    text-decoration: underline;
+    color: #2aa247;
+}
+
+/* My Profile Page Styling */
+.profile-card {
+    max-width: 700px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+.profile-card h1 {
+    font-size: 2rem;
+    color: #34C759;
+    margin-bottom: 20px;
+}
+
+.profile-card hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 2px solid #f0f0f0;
+}
+
+.profile-card h5 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.profile-card p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.profile-card .badge {
+    font-size: 1rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+.btn-primary {
+    background-color: #34C759;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2aa247;
+    transform: translateY(-2px);
+}
+
+
+/* Settings Page */
+.settings-form {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.login-form .btn-primary, .signup-form .btn-success {
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-size: 1rem;
+.settings-form .form-label {
+    font-weight: bold;
+    color: #333;
 }
 
-.login-form .btn-primary:hover, .signup-form .btn-success:hover {
-    opacity: 0.9;
+.settings-form .btn {
+    background-color: #34C759;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.settings-form .btn:hover {
+    background-color: #2aa247;
+}
+
+/* Settings Update Notification */
+.alert-container {
+    margin-bottom: 20px;
+}
+
+.alert {
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error, .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-dismissible .btn-close {
+    color: #000;
 }

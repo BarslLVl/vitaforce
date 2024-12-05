@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Settings - VitaForce{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Settings</h1>
+
+    <!-- Notification Section -->
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <!-- Update Email Section -->
+        <div class="col-md-6">
+            <h3>Update Email</h3>
+            <form method="POST" action="{% url 'update_email' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="email" class="form-label">New Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your new email"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Update Email</button>
+            </form>
+        </div>
+
+        <!-- Update Password Section -->
+        <div class="col-md-6">
+            <h3>Change Password</h3>
+            <form method="POST" action="{% url 'change_password' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="current_password" class="form-label">Current Password</label>
+                    <input type="password" class="form-control" id="current_password" name="current_password"
+                        placeholder="Enter your current password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="new_password" class="form-label">New Password</label>
+                    <input type="password" class="form-control" id="new_password" name="new_password"
+                        placeholder="Enter your new password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm New Password</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                        placeholder="Confirm your new password" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Change Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Update Personal Information Section -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h3>Update Personal Information</h3>
+            <form method="POST" action="{% url 'update_personal_info' %}">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name"
+                            value="{{ user.userprofile.first_name }}" placeholder="Enter your first name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name"
+                            value="{{ user.userprofile.last_name }}" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="date_of_birth" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"
+                        value="{{ user.userprofile.date_of_birth }}" required>
+                </div>
+                <button type="submit" class="btn btn-info w-100">Update Information</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

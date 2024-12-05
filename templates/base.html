@@ -40,20 +40,21 @@
                 </ul>
                 <div class="d-flex">
                     {% if user.is_authenticated %}
-                        <div class="dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle"></i> {{ user.username }}
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="/profile/">My Profile</a></li>
-                                <li><a class="dropdown-item" href="/settings/">Settings</a></li>
-                                <li><a class="dropdown-item" href="/logout/">Logout</a></li>
-                            </ul>
-                        </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> {{ user.username }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/profile/">Profile</a></li>
+                            <li><a class="dropdown-item" href="/settings/">Settings</a></li>
+                            <li><a class="dropdown-item" href="/logout/">Logout</a></li>
+                        </ul>
+                    </div>
+
                     {% else %}
-                        <a href="/login/" class="btn btn-outline-light me-2">Login</a>
-                        <a href="/signup/" class="btn btn-success">Sign Up</a>
+                    <a href="/login/" class="btn btn-outline-light me-2">Login</a>
+                    <a href="/signup/" class="btn btn-success">Sign Up</a>
                     {% endif %}
                 </div>
             </div>

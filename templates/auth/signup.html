@@ -6,23 +6,35 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center mb-4">Create Your Account</h1>
-    <form method="POST" class="signup-form mx-auto" style="max-width: 400px;">
+    <form method="POST" class="signup-form mx-auto p-4 rounded shadow-sm bg-white" style="max-width: 450px;">
         {% csrf_token %}
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+            {{ form.username }}
+            {% if form.username.errors %}
+            <div class="text-danger small">{{ form.username.errors|escape }}</div>
+            {% endif %}
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            {{ form.email }}
+            {% if form.email.errors %}
+            <div class="text-danger small">{{ form.email.errors|escape }}</div>
+            {% endif %}
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            <label for="password1" class="form-label">Password</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+            <div class="text-danger small">{{ form.password1.errors|escape }}</div>
+            {% endif %}
         </div>
         <div class="mb-3">
-            <label for="confirm-password" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+            <label for="password2" class="form-label">Confirm Password</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+            <div class="text-danger small">{{ form.password2.errors|escape }}</div>
+            {% endif %}
         </div>
         <button type="submit" class="btn btn-success w-100">Sign Up</button>
     </form>

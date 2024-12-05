@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="profile-card mx-auto p-4">
+        <h1 class="text-center mb-4">Welcome, {{ user.username }}</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h5><strong>Email:</strong></h5>
+                <p>{{ user.email }}</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h5><strong>Group:</strong></h5>
+                <p><span class="badge bg-success">{{ user.groups.first.name }}</span></p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h5><strong>First Name:</strong></h5>
+                <p>{{ user.profile.first_name }}</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h5><strong>Last Name:</strong></h5>
+                <p>{{ user.profile.last_name }}</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h5><strong>Date of Birth:</strong></h5>
+                <p>{{ user.profile.date_of_birth|date:"d M Y" }}</p>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'settings' %}" class="btn btn-primary btn-lg">Edit Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
