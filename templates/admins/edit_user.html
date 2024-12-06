@@ -1,0 +1,32 @@
+{% extends 'admins/base_admin.html' %}
+{% block title %}Edit User{% endblock %}
+{% block content %}
+<h1>Edit User: {{ user.username }}</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">New Password (leave blank to keep current)</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password">
+    </div>
+    <div class="mb-3">
+        <label for="group" class="form-label">Group</label>
+        <select class="form-control" id="group" name="group">
+            {% for group in groups %}
+            <option value="{{ group.id }}" {% if group in user.groups.all %}selected{% endif %}>
+                {{ group.name }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update User</button>
+</form>
+<a href="{% url 'admin_manage_users' %}" class="btn btn-secondary mt-3">Back to Users</a>
+{% endblock %}

@@ -46,12 +46,19 @@
                             <i class="bi bi-person-circle"></i> {{ user.username }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            {% if is_banned %}
+                            <li><a class="dropdown-item" href="/support/">Contact Support</a></li>
+                            <li><a class="dropdown-item" href="/logout/">Logout</a></li>
+                            {% else %}
                             <li><a class="dropdown-item" href="/profile/">Profile</a></li>
                             <li><a class="dropdown-item" href="/settings/">Settings</a></li>
+                            {% if is_admin %}
+                            <li><a class="dropdown-item" href="/admin-panel/">A-Panel</a></li>
+                            {% endif %}
                             <li><a class="dropdown-item" href="/logout/">Logout</a></li>
+                            {% endif %}
                         </ul>
                     </div>
-
                     {% else %}
                     <a href="/login/" class="btn btn-outline-light me-2">Login</a>
                     <a href="/signup/" class="btn btn-success">Sign Up</a>

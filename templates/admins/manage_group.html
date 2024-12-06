@@ -1,0 +1,25 @@
+{% extends 'admins/base_admin.html' %}
+{% block title %}Manage Groups{% endblock %}
+
+{% block content %}
+<h2>Manage Groups</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Group Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for group in groups %}
+        <tr>
+            <td>{{ group.name }}</td>
+            <td>
+                <a href="{% url 'admin_edit_group' group.id %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'admin_delete_group' group.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

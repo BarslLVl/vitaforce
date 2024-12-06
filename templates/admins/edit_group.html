@@ -1,0 +1,27 @@
+{% extends 'admins/base_admin.html' %}
+
+{% block content %}
+<h1>Edit Group: {{ group.name }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="group_name" class="form-label">Group Name</label>
+        <input type="text" class="form-control" id="group_name" name="name" value="{{ group.name }}" required>
+    </div>
+
+    <h3>Permissions</h3>
+    <div class="form-check">
+        {% for permission in permissions %}
+        <div>
+            <input type="checkbox" class="form-check-input" name="permissions" value="{{ permission.id }}"
+                id="permission_{{ permission.id }}" {% if permission in group.permissions.all %}checked{% endif %}>
+            <label class="form-check-label" for="permission_{{ permission.id }}">{{ permission.name }}</label>
+        </div>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+    <a href="{% url 'admin_manage_groups' %}" class="btn btn-secondary mt-3">Cancel</a>
+</form>
+{% endblock %}

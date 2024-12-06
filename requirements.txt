@@ -1,3 +1,5 @@
 Django>=4.0
 django-environ
 django-decouple
+stripe
+mysqlclient

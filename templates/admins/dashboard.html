@@ -1,0 +1,27 @@
+{% extends 'admins/base_admin.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1>Welcome to Admin Dashboard</h1>
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Manage Users</h5>
+                <p class="card-text">View, edit, and delete users.</p>
+                <a href="{% url 'admin_manage_users' %}" class="btn btn-light">Go</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title">Manage Groups</h5>
+                <p class="card-text">View, edit, and delete groups.</p>
+                <a href="{% url 'admin_manage_groups' %}" class="btn btn-light">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
