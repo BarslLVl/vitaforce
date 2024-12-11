@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Review{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Edit Review</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category" class="form-control">
+                <option value="Product" {% if review.category == "Product" %}selected{% endif %}>Product</option>
+                <option value="Plan" {% if review.category == "Plan" %}selected{% endif %}>Plan</option>
+                <option value="Service" {% if review.category == "Service" %}selected{% endif %}>Service</option>
+                <option value="Other" {% if review.category == "Other" %}selected{% endif %}>Other...</option>
+            </select>
+        </div>
+        <div class="form-group mt-3">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

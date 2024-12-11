@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Order History{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Order History</h1>
+
+    {% if orders %}
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total Price</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created_at|date:"d M Y H:i" }}</td>
+                <td>£{{ order.total_price }}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#order-{{ order.id }}">
+                        View Details
+                    </button>
+                </td>
+            </tr>
+            <tr class="collapse" id="order-{{ order.id }}">
+                <td colspan="4">
+                    <h5>Items:</h5>
+                    <ul>
+                        {% for item in order.items.all %}
+                        <li>
+                            {{ item.quantity }} x 
+                            {% if item.product %}
+                                {{ item.product.name }}
+                            {% elif item.exercise_plan %}
+                                {{ item.exercise_plan.name }}
+                            {% elif item.nutrition_plan %}
+                                {{ item.nutrition_plan.name }}
+                            {% endif %}
+                            - £{{ item.get_subtotal }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">You have no orders.</p>
+    {% endif %}
+</div>
+{% endblock %}

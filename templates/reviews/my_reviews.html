@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}All Reviews{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">All Reviews</h2>
+    <a href="{% url 'create_review' %}" class="btn btn-primary mb-4">Add New Review</a>
+    <div class="mt-4">
+        {% for review in reviews %}
+            <div class="review-card">
+                <p>{{ review.content|safe }}</p>
+                <p class="review-meta"><small>By {{ review.user.username }} on {{ review.created_at|date:"d M Y" }}</small></p>
+            </div>
+        {% empty %}
+            <p>No reviews available yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

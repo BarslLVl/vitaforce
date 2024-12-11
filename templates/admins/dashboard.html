@@ -5,6 +5,7 @@
 {% block content %}
 <h1>Welcome to Admin Dashboard</h1>
 <div class="row mt-4">
+    <!-- Manage Users -->
     <div class="col-md-4">
         <div class="card text-white bg-primary">
             <div class="card-body">
@@ -14,6 +15,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Manage Groups -->
     <div class="col-md-4">
         <div class="card text-white bg-success">
             <div class="card-body">
@@ -23,5 +26,89 @@
             </div>
         </div>
     </div>
+
+    <!-- Manage Categories -->
+    <div class="col-md-4">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <h5 class="card-title">Manage Categories</h5>
+                <p class="card-text">Add, edit, or delete product categories.</p>
+                <a href="{% url 'admin_manage_categories' %}" class="btn btn-light">Go</a>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="row mt-4">
+    <!-- Manage Products -->
+    <div class="col-md-4">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5 class="card-title">Manage Products</h5>
+                <p class="card-text">View, edit, add, or delete products.</p>
+                <a href="{% url 'admin_manage_products' %}" class="btn btn-dark">Go</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Exercise Plans -->
+    <div class="col-md-4">
+        <div class="card text-white bg-secondary">
+            <div class="card-body">
+                <h5 class="card-title">Manage Exercise Plans</h5>
+                <p class="card-text">View, edit, add, or delete exercise plans.</p>
+                <a href="{% url 'admin_manage_exercise_plans' %}" class="btn btn-light">Go</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Nutrition Plans -->
+    <div class="col-md-4">
+        <div class="card text-white bg-danger">
+            <div class="card-body">
+                <h5 class="card-title">Manage Nutrition Plans</h5>
+                <p class="card-text">View, edit, add, or delete nutrition plans.</p>
+                <a href="{% url 'admin_manage_nutrition_plans' %}" class="btn btn-light">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <!-- Manage Reviews -->
+    <div class="col-md-4">
+        <div class="card text-white bg-dark">
+            <div class="card-body">
+                <h5 class="card-title">Manage Reviews</h5>
+                <p class="card-text">View, edit, or delete reviews.</p>
+                <a href="{% url 'admin_manage_reviews' %}" class="btn btn-light">Go</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manage Posts -->
+    <div class="col-md-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Manage Posts</h5>
+                <p class="card-text">View, edit, or delete posts.</p>
+                <a href="{% url 'admin_manage_posts' %}" class="btn btn-light">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Support Requests -->
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Support Requests</h5>
+                    <p class="card-text">View, edit, or delete support requests.</p>
+                    <a href="{% url 'admin_support_requests' %}" class="btn btn-light">Go</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

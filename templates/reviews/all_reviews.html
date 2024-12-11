@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}All Reviews{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-center">All Reviews</h2>
+        <a href="{% url 'create_review' %}" class="btn btn-success">+ Add New Review</a>
+    </div>
+    <div class="row">
+        {% for review in reviews %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="card-text scrollable-content">
+                            {{ review.content|safe }}
+                        </div>
+                        <div class="highlighted-meta d-flex justify-content-between align-items-center mt-3">
+                            <small class="text-muted">By {{ review.user.username }} on {{ review.created_at|date:"d M Y" }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted">No reviews available yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

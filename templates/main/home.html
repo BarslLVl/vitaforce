@@ -59,7 +59,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Workout Plans</h5>
                     <p class="card-text">Customized plans to help you reach your fitness goals.</p>
-                    <a href="/shop/" class="btn btn-primary">Learn More</a>
+                    <a href="/plans/exercise/" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Nutrition Plans</h5>
                     <p class="card-text">Expert guidance on healthy eating for your lifestyle.</p>
-                    <a href="/shop/" class="btn btn-primary">Learn More</a>
+                    <a href="/plans/nutrition/" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Join the Community</h5>
                     <p class="card-text">Share your progress and motivate others.</p>
-                    <a href="/community/" class="btn btn-primary">Learn More</a>
+                    <a href="/posts/all/" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
         </div>
@@ -205,6 +205,43 @@
         </div>
     </div>
 </div>
+
+<!-- Review and Posts Section-->
+<div class="container mt-5">
+    <h2 class="text-center">Recent Reviews</h2>
+    <div class="reviews-container">
+        {% for review in reviews %}
+        <div class="review-card">
+            <p class="review-content" data-full-text="{{ review.content|safe }}">
+                {{ review.content|safe|slice:":300" }}{% if review.content|length > 300 %}...{% endif %}
+            </p>
+            <p class="review-meta"><small>By {{ review.user.username }} on {{ review.created_at|date:"d M Y" }}</small></p>
+        </div>
+        {% empty %}
+        <p>No reviews available yet.</p>
+        {% endfor %}
+        <a href="{% url 'all_reviews' %}" class="btn btn-primary mt-3">View all reviews</a>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h2 class="text-center">Recent Posts</h2>
+    <div class="posts-container">
+        {% for post in posts %}
+        <div class="post-card">
+            <h3 class="post-title">{{ post.title }}</h3>
+            <p class="post-content" data-full-text="{{ post.content|safe }}">
+                {{ post.content|safe|slice:":300" }}{% if post.content|length > 300 %}...{% endif %}
+            </p>
+            <p class="post-meta"><small>By {{ post.user.username }} on {{ post.created_at|date:"d M Y" }}</small></p>
+        </div>
+        {% empty %}
+        <p>No posts available yet.</p>
+        {% endfor %}
+        <a href="{% url 'all_posts' %}" class="btn btn-primary mt-3">View all posts</a>
+    </div>
+</div>
+
 
 
 <!-- Calorie Calculator Section -->

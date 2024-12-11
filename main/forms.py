@@ -1,7 +1,8 @@
+from tinymce.widgets import TinyMCE
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from main.models import UserProfile
+from main.models import UserProfile, SupportRequest, Review, Post
 
 # Login Form
 class LoginForm(AuthenticationForm):
@@ -62,3 +63,18 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['first_name', 'last_name', 'date_of_birth']
+        
+# Support Request Form
+class ReviewForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Review
+        fields = ['content']
+
+class PostForm(forms.ModelForm):
+    content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
+    class Meta:
+        model = Post
+        fields = ['title', 'content']

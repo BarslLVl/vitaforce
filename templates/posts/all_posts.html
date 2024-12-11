@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}All Posts{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-center">All Posts</h2>
+        <a href="{% url 'create_post' %}" class="btn btn-success">+ Create New Post</a>
+    </div>
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <div class="card-text scrollable-content">
+                            {{ post.content|safe }}
+                        </div>
+                        <div class="highlighted-meta d-flex justify-content-between align-items-center mt-3">
+                            <small class="text-muted">By {{ post.user.username }} on {{ post.created_at|date:"d M Y" }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted">No posts available yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

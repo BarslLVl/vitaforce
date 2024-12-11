@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ nutrition_plan.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">{{ nutrition_plan.name }}</h1>
+    <p class="text-muted text-center">Duration: {{ nutrition_plan.duration }}</p>
+    <p>{{ nutrition_plan.description }}</p>
+    <p><strong>Price:</strong> £{{ nutrition_plan.price }}</p>
+
+    <!-- Add to Cart Form -->
+    <form method="post" action="{% url 'add_to_cart' 'nutrition' nutrition_plan.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="btn btn-success">Add to Cart</button>
+    </form>
+
+    <a href="{% url 'nutrition_plans' %}" class="btn btn-secondary mt-3">Back to Plans</a>
+</div>
+{% endblock %}

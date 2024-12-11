@@ -1,0 +1,111 @@
+{% extends 'admins/base_admin.html' %}
+{% block title %}Support Requests - Admin{% endblock %}
+
+{% block content %}
+<div class="container admin-content">
+    <h1 class="text-center mb-4">Support Requests</h1>
+
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if requests %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Request Type</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %}
+                <tr>
+                    <td>{{ request.name }}</td>
+                    <td>{{ request.email }}</td>
+                    <td class="text-capitalize">{{ request.request_type }}</td>
+                    <td class="text-truncate" style="max-width: 300px;" title="{{ request.message }}">
+                        {{ request.message }}
+                    </td>
+                    <td class="text-center">
+                        {% if request.status == 'not_reviewed' %}
+                        <span class="badge bg-secondary">Not Reviewed</span>
+                        {% elif request.status == 'in_review' %}
+                        <span class="badge bg-warning text-dark">In Review</span>
+                        {% elif request.status == 'done' %}
+                        <span class="badge bg-success">Done</span>
+                        {% elif request.status == 'rejected' %}
+                        <span class="badge bg-danger">Rejected</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group">
+                            <form method="post" class="d-inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="support_id" value="{{ request.id }}">
+                                <button name="action" value="in_review" class="btn btn-warning btn-sm">
+                                    In Review
+                                </button>
+                                <button name="action" value="done" class="btn btn-success btn-sm">
+                                    Done
+                                </button>
+                                <button name="action" value="rejected" class="btn btn-danger btn-sm">
+                                    Reject
+                                </button>
+                                <button name="action" value="delete" class="btn btn-outline-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                            <!-- Add 'View Details' button -->
+                            <button class="btn btn-info btn-sm" data-bs-toggle="collapse"
+                                data-bs-target="#details-{{ request.id }}">
+                                View Details
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Detailed View -->
+                <tr class="collapse" id="details-{{ request.id }}">
+                    <td colspan="6">
+                        <div class="p-3 border rounded">
+                            <h5>Request Details</h5>
+                            <p><strong>Name:</strong> {{ request.name }}</p>
+                            <p><strong>Email:</strong> {{ request.email }}</p>
+                            <p><strong>Request Type:</strong> {{ request.request_type }}</p>
+                            <p><strong>Message:</strong> {{ request.message }}</p>
+                            <p><strong>Status:</strong>
+                                {% if request.status == 'not_reviewed' %}
+                                Not Reviewed
+                                {% elif request.status == 'in_review' %}
+                                In Review
+                                {% elif request.status == 'done' %}
+                                Done
+                                {% elif request.status == 'rejected' %}
+                                Rejected
+                                {% endif %}
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center" role="alert">
+        No support requests at the moment.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

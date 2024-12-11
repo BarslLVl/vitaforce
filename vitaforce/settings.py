@@ -11,24 +11,47 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
-from decouple import config
 import environ
+import os
 
-# Initialize environment variables
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'assets', 'css'),
+    os.path.join(BASE_DIR, 'assets', 'js'),
+    os.path.join(BASE_DIR, 'assets', 'media'),
+]
+
+# Static file storage location for Heroku
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# For media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'assets', 'media')
+
 env = environ.Env()
 environ.Env.read_env()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'vitaforce.settings')
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+# Set the base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# Read .env file
+environ.Env.read_env(BASE_DIR / '.env')
+
+# Security settings
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-placeholder-key')
+DEBUG = env('DEBUG', default=False)
+ALLOWED_HOSTS = ['powerful-brushlands-09372-5f1dc58ae9c5.herokuapp.com', 'localhost', '127.0.0.1']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+# Trusted origins for CSRF
+CSRF_TRUSTED_ORIGINS = env.list(
+    'CSRF_TRUSTED_ORIGINS',
+    default=['http://127.0.0.1', 'https://powerful-brushlands-09372-5f1dc58ae9c5.herokuapp.com', 'http://127.0.0.1:8000']
+)
 
 # Application definition
 INSTALLED_APPS = [
@@ -38,11 +61,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tinymce',
     'main',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,7 +81,7 @@ ROOT_URLCONF = 'vitaforce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,7 +94,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'vitaforce.wsgi.application'
 
@@ -87,40 +111,42 @@ DATABASES = {
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
+# Static and media files
+STATIC_URL = '/assets/'
 STATICFILES_DIRS = [BASE_DIR / 'assets']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Media files
-MEDIA_URL = '/media/'
+MEDIA_URL = '/assets/media/'
 MEDIA_ROOT = BASE_DIR / 'assets/media'
 
 # Stripe API keys
 STRIPE_TEST_PUBLIC_KEY = env('STRIPE_TEST_PUBLIC_KEY')
 STRIPE_TEST_SECRET_KEY = env('STRIPE_TEST_SECRET_KEY')
+
+# TinyMCE configuration
+TINYMCE_DEFAULT_CONFIG = {
+    "height": 360,
+    "width": 800,
+    "menubar": True,
+    "plugins": ("advlist autolink lists link image charmap print preview anchor "
+                "searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount"),
+    "toolbar": ("undo redo | formatselect | bold italic backcolor | alignleft aligncenter "
+                "alignright alignjustify | bullist numlist outdent indent | removeformat | help"),
+    "valid_elements": "p,br,strong,b,em,i,u,ul,ol,li,a[href],img[src|alt|title|width|height],h1,h2,h3,h4,h5,h6",
+    "content_style": "body { font-family:Arial,sans-serif; font-size:14px }",
+}
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

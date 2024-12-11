@@ -11,10 +11,12 @@
     {% if messages %}
     <div class="alert-container">
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+            {% if 'settings' in message.tags %}
+            <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
         {% endfor %}
     </div>
     {% endif %}
@@ -26,9 +28,12 @@
             <form method="POST" action="{% url 'update_email' %}">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="email" class="form-label">New Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your new email"
-                        required>
+                    <label for="email" class="form-label">Current Email</label>
+                    <input type="email" class="form-control" id="current_email" value="{{ user.email }}" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="new_email" class="form-label">New Email</label>
+                    <input type="email" class="form-control" id="new_email" name="email" placeholder="Enter your new email" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Update Email</button>
             </form>
@@ -69,18 +74,18 @@
                     <div class="col-md-6">
                         <label for="first_name" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="first_name" name="first_name"
-                            value="{{ user.userprofile.first_name }}" placeholder="Enter your first name" required>
+                            value="{{ user.userprofile.first_name|default:'' }}" placeholder="Enter your first name" required>
                     </div>
                     <div class="col-md-6">
                         <label for="last_name" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="last_name" name="last_name"
-                            value="{{ user.userprofile.last_name }}" placeholder="Enter your last name" required>
+                            value="{{ user.userprofile.last_name|default:'' }}" placeholder="Enter your last name" required>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="date_of_birth" class="form-label">Date of Birth</label>
                     <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"
-                        value="{{ user.userprofile.date_of_birth }}" required>
+                        value="{{ user.userprofile.date_of_birth|date:'Y-m-d'|default:'' }}" required>
                 </div>
                 <button type="submit" class="btn btn-info w-100">Update Information</button>
             </form>

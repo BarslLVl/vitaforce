@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}My Posts{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">My Posts</h2>
+    <a href="{% url 'create_post' %}" class="btn btn-primary mb-4">Create New Post</a>
+    <div class="mt-4">
+        {% for post in user_posts %}
+        <div class="post-card mb-4">
+            <h3 class="post-title">{{ post.title }}</h3>
+            <p class="post-content">{{ post.content|safe }}</p>
+            <p class="post-meta"><small>By you on {{ post.created_at|date:"d M Y" }}</small></p>
+            <div class="d-flex justify-content-between mt-2">
+                <a href="{% url 'edit_post' post.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'delete_post' post.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>You haven't written any posts yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

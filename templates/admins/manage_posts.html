@@ -1,0 +1,34 @@
+{% extends 'admins/base_admin.html' %}
+
+{% block title %}Manage Posts{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Manage Posts</h2>
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <div class="card-text scrollable-content">
+                            {{ post.content|safe }}
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <small class="text-muted">By {{ post.user.username }} on {{ post.created_at|date:"d M Y" }}</small>
+                            <div>
+                                <a href="{% url 'admin_edit_post' post.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{% url 'admin_delete_post' post.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted">No posts available.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

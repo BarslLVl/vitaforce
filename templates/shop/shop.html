@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Shop - VitaForce{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Shop</h1>
+
+    <!-- Categories Section -->
+    <div class="categories-section mb-5">
+        <h2>Categories</h2>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-md-4 mb-3">
+                <div class="card {% if selected_category == category.slug %}border-primary{% endif %}">
+                    <a href="{% url 'shop_category' category.slug %}" class="text-decoration-none card-link">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ category.name }}</h5>
+                        </div>
+                    </a>
+                    <div class="card-footer text-center">
+                        <p class="card-text">
+                            <span class="short-text">
+                                {{ category.description|truncatewords:10 }}{% if category.description|length > 100%}...{% endif %}
+                            </span>
+                            <span class="full-text d-none">
+                                {{ category.description }}
+                            </span>
+                            {% if category.description|length > 100 %}
+                            <button type="button" class="btn btn-link toggle-text">
+                                Show
+                            </button>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if selected_category %}
+        <div class="text-center mt-3">
+            <a href="{% url 'shop_home' %}" class="btn btn-secondary">Reset Filter</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Products Section -->
+    <div class="products-section">
+        <h2>Products</h2>
+        <div class="row">
+            {% if products %}
+            {% for product in products %}
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+                    {% else %}
+                    <img src="{% static 'media/noimage/noimage1.png' %}" class="card-img-top product-image"
+                        alt="Default Image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">
+                            {% if product.description|length > 100 %}
+                            <span class="short-text">{{ product.description|truncatewords:15 }}...</span>
+                            <span class="full-text d-none">{{ product.description }}</span>
+                            <button class="btn btn-link toggle-text" data-target="#product-{{ forloop.counter }}">
+                                Show
+                            </button>
+                            {% else %}
+                            {{ product.description }}
+                            {% endif %}
+                        </p>
+                        <p class="card-text">
+                            <strong>£{{ product.price }}</strong>
+                        </p>
+                        <p class="card-text">
+                            <strong
+                                class="{% if not product.is_in_stock %}text-danger{% else %}text-success{% endif %}">
+                                {% if product.stock > 0 %}In Stock{% else %}Out of Stock{% endif %}
+                            </strong>
+                        </p>
+                        <a href="{% url 'shop_product_detail' product.id %}"
+                            class="btn btn-primary {% if not product.is_in_stock %}disabled{% endif %}">
+                            {% if product.is_in_stock %}View Product{% else %}Unavailable{% endif %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-center">No products found for this category.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -5,12 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VitaForce - Your ultimate fitness and wellness community.">
-    <meta name="keywords" content="fitness, health, wellness, exercise, nutrition">
+    <link rel="icon" href="{% static 'media/favicon/favicon.ico' %}" type="image/x-icon">
+    <meta name="description"
+        content="VitaForce: Your ultimate fitness and wellness community. Read reviews, share posts, and discover plans and products to achieve your goals.">
+    <meta name="keywords"
+        content="fitness, reviews, wellness, plans, products, aboutus, strong, protein, vitamins, VitaForce">
+    <meta name="author" content="VitaForce Team">
     <title>{% block title %}VitaForce{% endblock %}</title>
+    <link rel="icon" href="{% static 'media/favicon/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -30,12 +36,25 @@
                         <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/about-us/' %}active{% endif %}"
+                        <a class="nav-link {% if request.path == '/about_us/' %}active{% endif %}"
                             href="/about_us/">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == '/support/' %}active{% endif %}"
                             href="/support/">Support</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if '/plans/' in request.path %}active{% endif %}" href="#"
+                            id="plansDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Plans
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/plans/exercise/">Exercise Plans</a></li>
+                            <li><a class="dropdown-item" href="/plans/nutrition/">Nutrition Plans</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/shop/' in request.path %}active{% endif %}" href="/shop/">Shop</a>
                     </li>
                 </ul>
                 <div class="d-flex">
@@ -52,6 +71,11 @@
                             {% else %}
                             <li><a class="dropdown-item" href="/profile/">Profile</a></li>
                             <li><a class="dropdown-item" href="/settings/">Settings</a></li>
+                            <li><a class="dropdown-item" href="/shop/cart/">My Cart</a></li>
+                            <li><a class="dropdown-item" href="/shop/order-history/">Orders History</a></li>
+                            <li>
+                                <a class="dropdown-item" href="/my-content/">My Posts/Reviews</a>
+                            </li>
                             {% if is_admin %}
                             <li><a class="dropdown-item" href="/admin-panel/">A-Panel</a></li>
                             {% endif %}
@@ -65,6 +89,7 @@
                     {% endif %}
                 </div>
             </div>
+        </div>
         </div>
     </nav>
 
@@ -81,11 +106,22 @@
                 Created by Janeks (^_^)*Bars |
                 <a href="https://github.com/BarslLVl/vitaforce" class="footer-link">GitHub Project</a>
             </p>
+            <p>
+                <a href="https://www.facebook.com/groups/517274627725346" target="_blank"
+                    rel="nofollow noopener noreferrer">
+                    <img src="{% static 'media/icons/facebook.png' %}" alt="Facebook"
+                        style="width: 40px; height: 40px;">
+                </a>
+            </p>
         </div>
     </footer>
 
     <script src="{% static 'js/script.js' %}"></script>
+    <script
+        id="mcjs">!function (c, h, i, m, p) { m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p) }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/c4ddbc20620faef8c4ffacfa7/034fe2d34030fb9f0f5ab56fd.js");</script>
+    <!-- <script src="{% static 'vendor/tinymce/tinymce.min.js' %}"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 
 </html>
